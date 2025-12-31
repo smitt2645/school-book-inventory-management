@@ -1,6 +1,10 @@
 const BookSet = require("../Models/bookSet");
 const BookSetItem = require("../Models/bookSetItem");
 const Book = require("../Models/book");
+const Board = require("../Models/board");
+const Medium = require("../Models/medium");
+const Class = require("../Models/class");
+const AcademicYear = require("../Models/academic_year");
 
 exports.create = async (req, res) => {
   try {
@@ -24,13 +28,47 @@ exports.create = async (req, res) => {
 
 exports.list = async (req, res) => {
   try {
-    const filters = req.query;
+    const { board_id, medium_id, class_id, year_id } = req.query;
+
+    // 🔥 build clean where object
+    const where = {};
+    if (board_id) where.board_id = board_id;
+    if (medium_id) where.medium_id = medium_id;
+    if (class_id) where.class_id = class_id;
+    if (year_id) where.year_id = year_id;
+
+    console.log("FINAL FILTERS:", where);
+
     const sets = await BookSet.findAll({
-      where: filters,
-      include: [{ model: BookSetItem, include: [Book] }],
+      where,
+      include: [
+        {
+          model: Board,
+        },
+        {
+          model: Medium,
+        },
+        {
+          model: Class,
+        },
+        {
+          model: AcademicYear,
+        },
+        {
+          model: BookSetItem,
+          // as: "bookSetItems",
+          include: [
+            {
+              model: Book,
+            },
+          ],
+        },
+      ],
     });
+
     res.json(sets);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 };

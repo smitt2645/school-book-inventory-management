@@ -8,8 +8,8 @@ const BookSetItem = sequelize.define("bookSetItem", {
 });
 
 // associations
-BookSetItem.belongsTo(BookSet, { foreignKey: "book_set_id", as: "bookSet" });
-BookSetItem.belongsTo(Book, { foreignKey: "book_id", as: "book" });
-BookSet.hasMany(BookSetItem, { foreignKey: "book_set_id", as: "bookSetItems" });
+BookSetItem.belongsTo(BookSet, { foreignKey: "book_set_id" });
+BookSetItem.belongsTo(Book, { foreignKey: "book_id" });
+BookSet.hasMany(BookSetItem, { foreignKey: "book_set_id" });
 
 module.exports = BookSetItem;

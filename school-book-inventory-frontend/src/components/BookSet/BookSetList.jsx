@@ -5,6 +5,7 @@ import { getBookSets, deleteBookSet } from "../../api";
 const BookSetList = ({ onEdit }) => {
   const { boards, mediums, classes, years } = useContext(BookSetContext);
   const [bookSets, setBookSets] = useState([]);
+  console.log("bookSets::::::", bookSets);
   const [filters, setFilters] = useState({
     board_id: "",
     medium_id: "",
@@ -94,14 +95,16 @@ const BookSetList = ({ onEdit }) => {
           </tr>
         </thead>
         <tbody>
-          {bookSets.map((bs) => (
+          {bookSets?.map((bs) => (
             <tr key={bs.id}>
-              <td>{bs.set_name}</td>
-              <td>{bs.board.name}</td>
-              <td>{bs.medium.name}</td>
-              <td>{bs.class.name}</td>
-              <td>{bs.year.name}</td>
-              <td>{bs.bookSetItems.map((b) => b.book.book_name).join(", ")}</td>
+              <td>{bs?.set_name || ""}</td>
+              <td>{bs?.board?.name || ""}</td>
+              <td>{bs?.medium?.name || ""}</td>
+              <td>{bs?.class?.name || ""}</td>
+              <td>{bs?.year?.name || ""}</td>
+              <td>
+                {bs?.bookSetItems?.map((b) => b?.book?.book_name).join(", ")}
+              </td>
               <td>
                 <button onClick={() => onEdit(bs.id)}>Edit</button>
                 <button onClick={() => handleDelete(bs.id)}>Delete</button>

@@ -49,6 +49,10 @@
   background: #4338ca;
 }
 
+.btn-sub-primary:hover {
+  background: #4338ca;
+}
+
 .dashboard-table {
   width: 100%;
   border-collapse: collapse;
@@ -75,6 +79,16 @@
 .btn-danger {
   padding: 6px 12px;
   background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.btn-sub-primary {
+  padding: 6px 12px;
+  margin-right: 5px;
+  background: #4f46e5;
   color: white;
   border: none;
   border-radius: 6px;

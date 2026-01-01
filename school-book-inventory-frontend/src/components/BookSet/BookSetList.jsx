@@ -122,7 +122,10 @@ const BookSetList = ({ onEdit }) => {
                   {bs?.bookSetItems?.map((b) => b?.book?.book_name).join(", ")}
                 </td>
                 <td>
-                  <button className="btn-primary" onClick={() => onEdit(bs.id)}>
+                  <button
+                    className="btn-sub-primary"
+                    onClick={() => onEdit(bs.id)}
+                  >
                     Edit
                   </button>
                   <button

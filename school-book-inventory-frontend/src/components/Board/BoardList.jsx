@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { getBoards, createBoard, deleteBoard } from "../../api";
+import "../../components/commonStyle.css";
+import Loader from "../../commonComponents/Loader";
 
 const BoardList = () => {
   const [boards, setBoards] = useState([]);
   const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const fetchBoards = async () => {
+    setLoading(true);
     const res = await getBoards();
-    setBoards(res.data);
+    setBoards(res?.data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -16,45 +21,70 @@ const BoardList = () => {
 
   const handleAdd = async () => {
     if (!name) return alert("Enter Board Name");
+    setLoading(true);
     await createBoard({ name });
     setName("");
-    fetchBoards();
+    await fetchBoards();
   };
 
   const handleDelete = async (id) => {
     if (window.confirm("Delete this board?")) {
+      setLoading(true);
       await deleteBoard(id);
-      fetchBoards();
+      await fetchBoards();
     }
   };
 
   return (
-    <div>
-      <h2>Boards</h2>
-      <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Board Name"
-      />
-      <button onClick={handleAdd}>Add Board</button>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {boards.map((b) => (
-            <tr key={b.id}>
-              <td>{b.name}</td>
-              <td>
-                <button onClick={() => handleDelete(b.id)}>Delete</button>
-              </td>
+    <div className="dashboard-card">
+      <h2 className="dashboard-title">Boards</h2>
+
+      <div className="dashboard-form">
+        <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Board Name"
+        />
+        <button className="btn-primary" onClick={handleAdd}>
+          Add Board
+        </button>
+      </div>
+
+      {loading ? (
+        <Loader />
+      ) : (
+        <table className="dashboard-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {boards.length > 0 ? (
+              boards.map((b) => (
+                <tr key={b?.id}>
+                  <td>{b?.name}</td>
+                  <td>
+                    <button
+                      className="btn-danger"
+                      onClick={() => handleDelete(b?.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="2" className="empty-text">
+                  No boards found
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };

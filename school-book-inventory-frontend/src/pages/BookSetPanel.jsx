@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import CreateBookSet from "../components/BookSet/CreateBookSet";
 import BookSetList from "../components/BookSet/BookSetList";
 import EditBookSet from "../components/BookSet/EditBookSet";
+// import "../../components/commonStyle.css";
+import "../components/commonStyle.css";
 
 const BookSetPanel = () => {
   const [editId, setEditId] = useState(null);
@@ -13,7 +15,9 @@ const BookSetPanel = () => {
 
   return (
     <div>
-      <button onClick={() => setShowCreate(true)}>Create Book Set</button>
+      <button className="dashboard-title" onClick={() => setShowCreate(true)}>
+        Create Book Set
+      </button>
       <BookSetList onEdit={setEditId} />
     </div>
   );

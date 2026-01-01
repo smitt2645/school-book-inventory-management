@@ -22,11 +22,11 @@ export const BookSetProvider = ({ children }) => {
       getYears(),
       getBooks(),
     ]);
-    setBoards(b.data);
-    setMediums(m.data);
-    setClasses(c.data);
-    setYears(y.data);
-    setBooks(bk.data);
+    setBoards(b?.data);
+    setMediums(m?.data);
+    setClasses(c?.data);
+    setYears(y?.data);
+    setBooks(bk?.data);
   };
 
   return (

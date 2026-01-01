@@ -102,6 +102,7 @@ const BookSetList = ({ onEdit }) => {
               <th>Medium</th>
               <th>Class</th>
               <th>Year</th>
+              <th>Quantity</th>
               <th>Books</th>
               <th>Action</th>
             </tr>
@@ -113,7 +114,10 @@ const BookSetList = ({ onEdit }) => {
                 <td>{bs?.board?.name || ""}</td>
                 <td>{bs?.medium?.name || ""}</td>
                 <td>{bs?.class?.name || ""}</td>
-                <td>{bs?.year?.name || ""}</td>
+                <td>{bs?.academic_year?.name || ""}</td>
+                <td>
+                  {bs?.bookSetItems?.map((b) => b?.quantity).join(", ")}
+                </td>{" "}
                 <td>
                   {bs?.bookSetItems?.map((b) => b?.book?.book_name).join(", ")}
                 </td>

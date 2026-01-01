@@ -84,7 +84,11 @@ exports.update = async (req, res) => {
     if (books) {
       await BookSetItem.destroy({ where: { book_set_id: id } });
       for (const b of books) {
-        await BookSetItem.create({ book_set_id: id, book_id: b.book_id });
+        await BookSetItem.create({
+          book_set_id: id,
+          book_id: b.book_id,
+          quantity: b.quantity,
+        });
       }
     }
     res.json(set);

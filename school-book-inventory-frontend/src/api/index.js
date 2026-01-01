@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://your-backend-name.onrender.com/api/v1",
+  baseURL: " https://school-management-be-31xm.onrender.com/api/v1",
   headers: { "Content-Type": "application/json" },
 });
 

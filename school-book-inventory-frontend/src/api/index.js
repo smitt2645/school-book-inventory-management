@@ -1,7 +1,17 @@
 import axios from "axios";
 
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://school-backend.onrender.com/api/v1"
+    : "http://localhost:5000/api/v1";
+
+// const api = axios.create({
+//   baseURL: "http://localhost:5000/api/v1",
+//   headers: { "Content-Type": "application/json" },
+// });
+
 const api = axios.create({
-  baseURL: "http://localhost:5000/api/v1",
+  baseURL: BASE_URL,
   headers: { "Content-Type": "application/json" },
 });
 

@@ -1,9 +1,11 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: " https://school-management-be-31xm.onrender.com/api/v1",
+  baseURL: import.meta.env.VITE_REACT_API_URL,
   headers: { "Content-Type": "application/json" },
 });
+
+console.log("import.meta.env.MODE", import.meta.env.VITE_REACT_API_URL);
 
 // Boards
 export const getBoards = () => api.get("/board");
